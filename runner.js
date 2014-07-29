@@ -41,9 +41,13 @@ Q.Sprite.extend("Player",{
       this.p.landed = 0;
     }
 
-    if(Q.inputs['up']) { // && this.p.landed > 0
+    if(Q.inputs['up'] && this.id === 1) { // && this.p.landed > 0
       this.p.vy = this.p.jump;
-    } 
+    }
+    else if(this.id === 2 && Q.inputs['down'])
+    {
+      this.p.vy = this.p.jump; 
+    }
 
     this.p.points = this.p.standingPoints;
     
@@ -155,8 +159,13 @@ Q.scene("level1",function(stage) {
 
   stage.insert(new Q.BoxThrower());
 
-  stage.insert(new Q.Player());
-  stage.insert(new Q.Player());
+  var p1 = new Q.Player();
+  var p2 = new Q.Player();
+  p1.id = 1
+  p2.id = 2
+
+  stage.insert(p1);
+  stage.insert(p2);
   stage.add("viewport");
 
 });
